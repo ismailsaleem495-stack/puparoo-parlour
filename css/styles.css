@@ -1,0 +1,2921 @@
+/* ============================================================
+   THE PAMPERED PAW — STYLESHEET
+   Dog Grooming Demo Website
+   Phase 1: Foundation & Navigation
+   ============================================================ */
+
+
+/* ============================================================
+   1. DESIGN TOKENS
+   All branding lives here. Re-skinning for a new client
+   means changing these ~8 colour variables only.
+   ============================================================ */
+:root {
+
+  /* Brand Colours — Puparoo Parlour: rose pink / blush / near-black */
+  --color-bg:           #F5EBF0;  /* soft blush pink */
+  --color-surface:      #EDD6E4;  /* elevated blush */
+  --color-primary:      #C4607E;  /* rose pink */
+  --color-primary-dark: #7A2D47;  /* deep rose — footer, reviews bg */
+  --color-accent:       #E8A0BC;  /* soft pink accent */
+  --color-text:         #1F0D15;  /* near-black with warm tint */
+  --color-text-light:   #7A4E5E;  /* muted mauve */
+  --color-white:        #FDFBFC;  /* warm white */
+
+  /* Typography */
+  --font-heading: 'Cormorant Garant', serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Shadows — always layered and colour-tinted, never flat */
+  --shadow-card:
+    0 2px 8px  rgba(86, 168, 236, 0.06),
+    0 8px 32px rgba(42, 42, 42, 0.08);
+
+  --shadow-elevated:
+    0 4px 16px rgba(86, 168, 236, 0.08),
+    0 16px 48px rgba(42, 42, 42, 0.12);
+
+  --shadow-nav:
+    0 1px 0   rgba(86, 168, 236, 0.08),
+    0 8px 32px rgba(42, 42, 42, 0.10);
+
+  /* Border Radius */
+  --radius:      4px;
+  --radius-lg:   12px;
+  --radius-pill: 100px;
+
+  /* Spacing Tokens — always use these, never random px values */
+  --space-xs:  0.5rem;   /*  8px */
+  --space-sm:  0.75rem;  /* 12px */
+  --space-md:  1rem;     /* 16px */
+  --space-lg:  1.5rem;   /* 24px */
+  --space-xl:  2rem;     /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  --space-4xl: 6rem;     /* 96px */
+  --space-5xl: 8rem;     /* 128px */
+
+  /* Nav */
+  --nav-height: 72px;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   220ms ease;
+  --transition-smooth: 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* ============================================================
+   2. CSS RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: auto; /* Lenis handles smooth scrolling — don't fight it */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+
+/* ============================================================
+   3. BASE TYPOGRAPHY
+   Headings: Cormorant Garant (elegant high-contrast serif)
+   Body:      DM Sans (clean, modern, legible)
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: clamp(2.75rem, 6vw, 5rem);
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+h3 {
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+}
+
+p {
+  font-family: var(--font-body);
+  line-height: 1.7;
+  color: var(--color-text-light);
+}
+
+
+/* ============================================================
+   4. NAV — BASE (solid sage green, always visible)
+   ============================================================ */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  background: var(--color-primary);
+  transition: box-shadow var(--transition-smooth);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* --- Logo -------------------------------------------------- */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-white);
+  text-decoration: none;
+  transition: opacity var(--transition-base);
+}
+
+.nav-logo:hover {
+  opacity: 0.78;
+}
+
+.nav-logo:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 6px;
+  border-radius: var(--radius);
+}
+
+.nav-logo-icon {
+  flex-shrink: 0;
+  transition: color var(--transition-smooth);
+  will-change: color;
+}
+
+.nav-logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color var(--transition-smooth);
+}
+
+
+/* --- Desktop Nav Links ------------------------------------- */
+/* Hidden on mobile — shown at 768px+ */
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.82);
+  text-decoration: none;
+  position: relative;
+  transition:
+    color   var(--transition-base),
+    opacity var(--transition-base);
+}
+
+/* Animated underline on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width var(--transition-smooth);
+}
+
+.nav-link:hover {
+  color: var(--color-white);
+  opacity: 1;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 6px;
+  border-radius: var(--radius);
+}
+
+.nav-link:active {
+  opacity: 0.7;
+}
+
+
+/* --- CTA Nav Link (pill button) ---------------------------- */
+.nav-link--cta {
+  padding: var(--space-xs) var(--space-lg);
+  border: 1px solid rgba(253, 252, 250, 0.38);
+  border-radius: var(--radius-pill);
+  color: var(--color-white);
+  transition:
+    background     var(--transition-base),
+    border-color   var(--transition-base),
+    color          var(--transition-base);
+}
+
+/* No underline on the pill button */
+.nav-link--cta::after {
+  display: none;
+}
+
+.nav-link--cta:hover {
+  background: rgba(253, 252, 250, 0.14);
+  border-color: var(--color-white);
+  color: var(--color-white);
+  opacity: 1;
+}
+
+.nav-link--cta:active {
+  background: rgba(253, 252, 250, 0.24);
+  opacity: 1;
+}
+
+
+/* --- Hamburger Button --------------------------------------- */
+.nav-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  padding: 0;
+  color: var(--color-white);
+  position: relative;
+  z-index: 1001; /* sits above the mobile overlay */
+  transition: color var(--transition-smooth);
+}
+
+.nav-hamburger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 8px;
+  border-radius: var(--radius);
+}
+
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transform-origin: center;
+  transition:
+    transform var(--transition-smooth),
+    opacity   220ms ease;
+}
+
+/* Hamburger morphs into X when menu is open */
+.site-nav.menu-open .hamburger-line:nth-child(1) {
+  transform: translateY(9.25px) rotate(45deg);
+}
+
+.site-nav.menu-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.site-nav.menu-open .hamburger-line:nth-child(3) {
+  transform: translateY(-9.25px) rotate(-45deg);
+}
+
+
+/* ============================================================
+   5. NAV — SCROLLED STATE
+   Nav is always sage green — scroll just adds a shadow to
+   show content is passing underneath.
+   ============================================================ */
+.site-nav.is-scrolled {
+  box-shadow: var(--shadow-nav);
+}
+
+/* Hamburger always white on the coloured nav */
+.site-nav.menu-open .nav-hamburger {
+  color: var(--color-white);
+}
+
+
+/* ============================================================
+   6. MOBILE OVERLAY
+   Full-screen navigation shown on mobile
+   ============================================================ */
+.nav-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999; /* below nav (1000) but above everything else */
+
+  /* Layered radial gradients for depth — not a flat colour */
+  background: var(--color-primary-dark);
+  background-image:
+    radial-gradient(ellipse at 15% 15%, rgba(86, 168, 236, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 85%, rgba(43, 102, 194, 0.45) 0%, transparent 50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xl);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity    0.35s ease,
+    visibility 0.35s ease;
+}
+
+.nav-mobile-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+/* Mobile nav link list */
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 9vw, 3.75rem);
+  font-weight: 300;
+  color: rgba(253, 252, 250, 0.78);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  text-decoration: none;
+  transition:
+    color   var(--transition-base),
+    opacity var(--transition-base);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus-visible {
+  color: var(--color-white);
+}
+
+.mobile-nav-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 10px;
+  border-radius: var(--radius);
+}
+
+.mobile-nav-link:active {
+  opacity: 0.6;
+}
+
+/* "Book Now" in the overlay is italicised accent colour */
+.mobile-nav-link--cta {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.mobile-nav-link--cta:hover,
+.mobile-nav-link--cta:focus-visible {
+  color: var(--color-white);
+}
+
+/* Phone number below the links */
+.mobile-nav-phone {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: rgba(253, 252, 250, 0.35);
+}
+
+.mobile-nav-phone a {
+  color: rgba(253, 252, 250, 0.45);
+  transition: color var(--transition-base);
+}
+
+.mobile-nav-phone a:hover {
+  color: var(--color-white);
+}
+
+
+/* ============================================================
+   7. SECTION PLACEHOLDER STYLES
+   Replaced phase-by-phase. Hero is now real (Phase 2).
+   ============================================================ */
+
+
+/* ============================================================
+   8. HERO SECTION
+   Full-screen video background. Content in lower third.
+   GSAP sets initial opacity/transform — no CSS initial states
+   needed here (GSAP prevents flash via gsap.set before paint).
+   ============================================================ */
+
+/* Section: fills viewport below the nav bar */
+.section-hero {
+  position: relative;
+  margin-top: var(--nav-height);
+  height: calc(100vh - var(--nav-height));
+  overflow: hidden;
+}
+
+/* --- Media layer: video fills the frame on desktop --------- */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  will-change: transform; /* GPU layer for scroll-scale animation */
+
+  /* Mobile fallback when video is hidden (max-width: 767px).
+     Add poster once assets/images/hero-poster.jpg is ready:
+     background-image: url('../assets/images/hero-poster.jpg');  */
+  background-color: var(--color-primary-dark);
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+/* Video plays on mobile — muted + playsinline works on modern iOS/Android */
+@media (max-width: 767px) {
+  .section-hero {
+    height: calc(100svh - var(--nav-height));
+  }
+  .hero-video {
+    display: block;
+  }
+}
+
+/* --- Gradient overlay: per CLAUDE.md spec ------------------ */
+/* Nav is now above the video so no top-band needed */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Left-side vignette for text contrast */
+    linear-gradient(to right, rgba(42, 42, 42, 0.32) 0%, transparent 60%),
+    /* Main bottom-to-top gradient per CLAUDE.md minimum spec */
+    linear-gradient(to top,   rgba(42, 42, 42, 0.65) 0%, rgba(42, 42, 42, 0.10) 100%);
+  pointer-events: none;
+}
+
+/* --- Content layer: pinned to the bottom ------------------- */
+.hero-content {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0 var(--space-lg);
+}
+
+.hero-content-inner {
+  max-width: 480px;
+}
+
+/* Eyebrow — location tag, top-right of hero (mirrors service tags opposite corner) */
+.hero-eyebrow {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #62B8F5; /* bright warm gold — pops on dark video */
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+  will-change: transform, opacity;
+}
+
+.hero-eyebrow-icon {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* Main headline */
+.hero-headline {
+  color: var(--color-white);
+  font-size: clamp(2.6rem, 6.5vw, 5.25rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: var(--space-lg);
+  will-change: transform, opacity;
+}
+
+/* "the Best" — italic Cormorant Garant in accent gold */
+.hero-headline-em {
+  font-style: italic;
+  color: var(--color-accent);
+  display: block; /* forces it onto its own line cleanly */
+}
+
+/* Subheadline */
+.hero-subheadline {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(253, 252, 250, 0.75);
+  max-width: 420px;
+  margin-bottom: var(--space-2xl);
+  will-change: transform, opacity;
+}
+
+/* Thin accent rule above the subheadline — editorial detail */
+.hero-subheadline::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.65;
+  margin-bottom: var(--space-lg);
+}
+
+/* CTA button */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-2xl);
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  will-change: transform, opacity;
+  transition:
+    background  var(--transition-base),
+    transform   var(--transition-base),
+    box-shadow  var(--transition-base);
+}
+
+.hero-cta:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 16px rgba(86, 168, 236, 0.35),
+    0 8px 28px rgba(42, 42, 42, 0.18);
+}
+
+.hero-cta:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.hero-cta:active {
+  transform: translateY(0);
+  background: var(--color-primary-dark);
+}
+
+/* Arrow icon: slides right on hover */
+.hero-cta-arrow {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.hero-cta:hover .hero-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* --- Scroll indicator -------------------------------------- */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  pointer-events: none;
+}
+
+.hero-scroll-hint-label {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.32);
+}
+
+/* Animated line: a pulse of light travels down */
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(253, 252, 250, 0.12);
+}
+
+.hero-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(253, 252, 250, 0.5));
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%   { top: -100%; }
+  100% { top:  100%; }
+}
+
+/* --- Service tags: floating column, bottom-right of hero --- */
+/* Indicates grooming services at a glance. Subtle — doesn't
+   compete with the headline, just tells you what this is. */
+.hero-service-tags {
+  position: absolute;
+  bottom: var(--space-2xl);
+  right: var(--space-lg);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  will-change: opacity;
+}
+
+.hero-service-tag {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #62B8F5; /* bright warm gold — pops on dark video */
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+  cursor: default;
+  transition:
+    color     var(--transition-base),
+    transform var(--transition-base);
+}
+
+.hero-service-tag:hover {
+  color: #FDFEFF;
+  transform: translateX(-4px);
+}
+
+/* Gold rule before each tag */
+.hero-service-tag::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: #62B8F5;
+  opacity: 0.7;
+  transition:
+    width   var(--transition-smooth),
+    opacity var(--transition-base);
+}
+
+.hero-service-tag:hover::before {
+  width: 28px;
+  opacity: 1;
+}
+
+/* --- Hero responsive --------------------------------------- */
+@media (max-width: 767px) {
+  .hero-service-tags {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    bottom: var(--space-xl);
+    padding: 0 var(--space-2xl);
+  }
+  .hero-eyebrow {
+    top: var(--space-xl);
+    right: var(--space-2xl);
+  }
+  .hero-service-tags {
+    right: var(--space-2xl);
+    bottom: var(--space-3xl);
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-content {
+    padding: 0 var(--space-3xl);
+  }
+  .hero-service-tags {
+    right: var(--space-3xl);
+  }
+}
+
+/* ============================================================
+   10. SERVICES SECTION
+   ============================================================ */
+
+.section-services {
+  padding: var(--space-5xl) 0;
+  background: var(--color-bg);
+  /* Layered radial gradients for depth — not a flat surface */
+  background-image:
+    radial-gradient(ellipse at 8%  60%, rgba(86, 168, 236, 0.07)  0%, transparent 55%),
+    radial-gradient(ellipse at 92% 15%, rgba(133, 194, 245, 0.06) 0%, transparent 50%);
+  position: relative;
+}
+
+.services-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* --- Section header ---------------------------------------- */
+.services-header {
+  max-width: 600px;
+  margin-bottom: var(--space-4xl);
+}
+
+.services-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.services-eyebrow-rule {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.services-eyebrow-num {
+  color: var(--color-accent);
+}
+
+.services-heading {
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+  line-height: 1.1;
+}
+
+/* Italic second line mirrors the hero headline treatment */
+.services-heading-em {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.services-intro {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-light);
+}
+
+/* --- Services grid ----------------------------------------- */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  list-style: none;
+}
+
+/* --- Service card ------------------------------------------ */
+.service-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  /* Top accent border — expands on hover */
+  border-top: 2px solid transparent;
+  will-change: transform;
+  transition:
+    transform    var(--transition-smooth),
+    box-shadow   var(--transition-smooth),
+    border-color var(--transition-smooth);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elevated);
+  border-top-color: var(--color-primary);
+}
+
+/* Featured: Full Groom */
+.service-card--featured {
+  background: var(--color-primary);
+  border-top-color: var(--color-accent);
+}
+
+.service-card--featured:hover {
+  background: var(--color-primary-dark);
+  border-top-color: var(--color-accent);
+  box-shadow:
+    0 8px 24px  rgba(43, 102, 194, 0.30),
+    0 24px 64px rgba(42, 42, 42, 0.18);
+}
+
+/* Card number — top-right, very subtle */
+.service-card-num {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: rgba(42, 42, 42, 0.18);
+}
+
+.service-card--featured .service-card-num {
+  color: rgba(253, 252, 250, 0.22);
+}
+
+/* Icon */
+.service-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+
+.service-card--featured .service-icon {
+  color: rgba(253, 252, 250, 0.80);
+}
+
+/* Service content: stacked vertically */
+.service-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  flex-grow: 1;
+}
+
+/* "Most Popular" badge */
+.service-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 3px var(--space-sm);
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-xs);
+}
+
+/* Title */
+.service-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 300;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.service-card--featured .service-title {
+  color: var(--color-white);
+}
+
+/* Description */
+.service-desc {
+  font-size: 0.88rem;
+  line-height: 1.72;
+  color: var(--color-text-light);
+  flex-grow: 1;
+  margin-top: var(--space-xs);
+}
+
+.service-card--featured .service-desc {
+  color: rgba(253, 252, 250, 0.68);
+}
+
+/* Footer: price + duration */
+.service-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(42, 42, 42, 0.08);
+}
+
+.service-card--featured .service-footer {
+  border-top-color: rgba(253, 252, 250, 0.14);
+}
+
+.service-price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.service-price-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  opacity: 0.7;
+  min-height: 1em; /* keeps alignment when blank for flat-fee items */
+}
+
+.service-card--featured .service-price-label {
+  color: rgba(253, 252, 250, 0.45);
+  opacity: 1;
+}
+
+.service-price {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.service-card--featured .service-price {
+  color: var(--color-accent);
+}
+
+.service-duration {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: rgba(42, 42, 42, 0.35);
+  padding-bottom: 2px;
+}
+
+.service-card--featured .service-duration {
+  color: rgba(253, 252, 250, 0.38);
+}
+
+/* --- Pricing note ------------------------------------------ */
+.services-note {
+  margin-top: var(--space-3xl);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  opacity: 0.8;
+}
+
+.services-note-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(86, 168, 236, 0.4);
+  transition:
+    color                var(--transition-base),
+    text-decoration-color var(--transition-base);
+}
+
+.services-note-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration-color: var(--color-primary-dark);
+}
+
+/* --- Services responsive ----------------------------------- */
+@media (max-width: 767px) {
+  .section-services {
+    padding: var(--space-3xl) 0;
+  }
+}
+
+@media (min-width: 640px) {
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .services-inner {
+    padding: 0 var(--space-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .services-inner {
+    padding: 0 var(--space-3xl);
+  }
+}
+
+/* ============================================================
+   11. ABOUT SECTION
+   ============================================================ */
+
+.section-about {
+  padding: var(--space-5xl) 0;
+  background: var(--color-surface);
+  background-image:
+    radial-gradient(ellipse at 90% 80%, rgba(86, 168, 236, 0.08)  0%, transparent 55%),
+    radial-gradient(ellipse at 5%  10%, rgba(133, 194, 245, 0.07) 0%, transparent 50%);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* --- Two-column grid --------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+/* --- Photo column ------------------------------------------ */
+.about-photo-col {
+  position: relative;
+}
+
+/* Decorative offset frame behind the photo */
+.about-photo-frame {
+  position: relative;
+}
+
+.about-photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: var(--space-lg) calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-lg);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about-photo-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  z-index: 1;
+  /* Sage fallback when image hasn't loaded */
+  background: var(--color-primary);
+  background-image:
+    radial-gradient(ellipse at 30% 40%, rgba(86, 168, 236, 0.6) 0%, var(--color-primary-dark) 100%);
+  /* Portrait aspect — matches a typical headshot crop */
+  aspect-ratio: 5 / 6;
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  will-change: transform;
+}
+
+/* Gradient overlay — per CLAUDE.md spec */
+.about-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(42, 42, 42, 0.45) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* Mix-blend colour tint over photo */
+.about-photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  mix-blend-mode: multiply;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+/* --- Floating credential badge ----------------------------- */
+.about-credential {
+  position: absolute;
+  bottom: calc(-1 * var(--space-lg));
+  right: calc(-1 * var(--space-md));
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-elevated);
+}
+
+.about-credential-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about-credential-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.about-credential-text strong {
+  color: var(--color-text);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.about-credential-text span {
+  color: var(--color-text-light);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* --- Content column ---------------------------------------- */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Eyebrow — same pattern as Services */
+.about-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.about-eyebrow-rule {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.about-eyebrow-num {
+  color: var(--color-accent);
+}
+
+/* Heading */
+.about-heading {
+  color: var(--color-text);
+  line-height: 1.1;
+}
+
+.about-heading-em {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+/* Body copy */
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-body p {
+  font-size: 1rem;
+  line-height: 1.78;
+  color: var(--color-text-light);
+}
+
+/* --- Trust stats ------------------------------------------- */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(42, 42, 42, 0.10);
+  border-bottom: 1px solid rgba(42, 42, 42, 0.10);
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-stat-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.about-stat-sup {
+  font-size: 0.55em;
+  letter-spacing: 0;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.about-stat-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  opacity: 0.75;
+}
+
+/* --- About CTA --------------------------------------------- */
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-2xl);
+  background: transparent;
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-primary);
+  align-self: flex-start;
+  transition:
+    background  var(--transition-base),
+    color       var(--transition-base),
+    transform   var(--transition-base),
+    box-shadow  var(--transition-base);
+}
+
+.about-cta:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 16px rgba(86, 168, 236, 0.28),
+    0 8px 28px rgba(42, 42, 42, 0.12);
+}
+
+.about-cta:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.about-cta:active {
+  transform: translateY(0);
+}
+
+.about-cta-arrow {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.about-cta:hover .about-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* --- About responsive -------------------------------------- */
+@media (min-width: 768px) {
+  .about-inner {
+    padding: 0 var(--space-2xl);
+  }
+  .about-credential {
+    right: var(--space-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 45fr 55fr;
+    gap: var(--space-5xl);
+  }
+  /* On desktop keep the photo col tall enough to be impactful */
+  .about-photo-wrap {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (min-width: 1280px) {
+  .about-inner {
+    padding: 0 var(--space-3xl);
+  }
+}
+
+/* ============================================================
+   12. REVIEWS SECTION
+   Dark background — first dark break since the hero.
+   ============================================================ */
+
+.section-reviews {
+  padding: var(--space-5xl) 0;
+  background: var(--color-text);
+  background-image:
+    radial-gradient(ellipse at 12% 55%, rgba(86, 168, 236, 0.20)  0%, transparent 55%),
+    radial-gradient(ellipse at 88% 15%, rgba(133, 194, 245, 0.10) 0%, transparent 50%);
+  position: relative;
+}
+
+.reviews-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* --- Section header --------------------------------------- */
+.reviews-header {
+  margin-bottom: var(--space-4xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.reviews-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.45);
+}
+
+.reviews-eyebrow-rule {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.reviews-eyebrow-num {
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+
+/* Aggregate rating: large number + stars + count */
+.reviews-aggregate {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.reviews-aggregate-score {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.reviews-aggregate-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.reviews-aggregate-stars {
+  font-size: 1.4rem;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.reviews-aggregate-count {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: rgba(253, 252, 250, 0.40);
+  text-transform: uppercase;
+}
+
+/* --- Reviews grid ----------------------------------------- */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+/* --- Review card ------------------------------------------ */
+.review-card {
+  background: rgba(253, 252, 250, 0.04);
+  border: 1px solid rgba(253, 252, 250, 0.08);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: relative;
+  transition:
+    background  var(--transition-smooth),
+    border-color var(--transition-smooth),
+    transform   var(--transition-smooth);
+  will-change: transform;
+}
+
+.review-card:hover {
+  background: rgba(253, 252, 250, 0.07);
+  border-color: rgba(253, 252, 250, 0.14);
+  transform: translateY(-4px);
+}
+
+/* Large decorative opening quotemark */
+.review-quote {
+  font-family: var(--font-heading);
+  font-size: 4.5rem;
+  line-height: 0.6;
+  color: var(--color-primary);
+  opacity: 0.55;
+  display: block;
+  user-select: none;
+}
+
+/* Star rating per card */
+.review-stars {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+}
+
+/* Review body text — Cormorant italic for elegance */
+.review-text {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(253, 252, 250, 0.85);
+  flex-grow: 1;
+  margin: 0;
+}
+
+/* Reviewer name + meta */
+.review-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: auto;
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(253, 252, 250, 0.08);
+}
+
+.review-name {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(253, 252, 250, 0.78);
+}
+
+.review-meta {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: rgba(253, 252, 250, 0.32);
+}
+
+/* --- CTA card (6th slot) ---------------------------------- */
+.review-card--cta {
+  background: transparent;
+  border-color: rgba(133, 194, 245, 0.25);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-md);
+  min-height: 200px;
+}
+
+.review-card--cta:hover {
+  background: rgba(133, 194, 245, 0.06);
+  border-color: rgba(133, 194, 245, 0.45);
+  transform: translateY(-4px);
+}
+
+.reviews-cta-stars {
+  font-size: 1.2rem;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+.reviews-cta-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.38);
+  margin: 0;
+}
+
+.reviews-cta-platform {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(253, 252, 250, 0.65);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.reviews-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-top: var(--space-sm);
+  transition: gap var(--transition-base), opacity var(--transition-base);
+}
+
+.reviews-cta-link:hover {
+  gap: var(--space-md);
+  opacity: 0.85;
+}
+
+.reviews-cta-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+/* --- Reviews responsive ------------------------------------ */
+@media (min-width: 640px) {
+  .reviews-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .reviews-inner {
+    padding: 0 var(--space-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .reviews-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .reviews-aggregate {
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .reviews-inner {
+    padding: 0 var(--space-3xl);
+  }
+}
+
+/* ============================================================
+   13. BOOKING SECTION
+   Sage green CTA section — the final conversion push.
+   ============================================================ */
+
+.section-booking {
+  padding: var(--space-5xl) 0;
+  background: var(--color-primary);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(253, 252, 250, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 85%, rgba(61,  84,  64,  0.50) 0%, transparent 50%);
+  position: relative;
+}
+
+.booking-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xl);
+}
+
+.booking-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--space-xl);
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Booking image column -------------------------------- */
+.booking-image-col {
+  flex-shrink: 0;
+  width: clamp(260px, 35vw, 480px);
+}
+
+.booking-image {
+  width: 100%;
+  height: clamp(320px, 40vw, 560px);
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 0 0 4px rgba(253, 254, 255, 0.10),
+    0 0 40px rgba(86, 168, 236, 0.30),
+    0 0 80px rgba(86, 168, 236, 0.12),
+    var(--shadow-elevated);
+}
+
+/* --- Eyebrow -------------------------------------------- */
+.booking-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.50);
+}
+
+.booking-eyebrow-rule {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+.booking-eyebrow-num {
+  color: var(--color-accent);
+  opacity: 0.85;
+}
+
+/* --- Heading -------------------------------------------- */
+.booking-heading {
+  color: var(--color-white);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.booking-heading-em {
+  font-style: italic;
+  color: rgba(253, 252, 250, 0.60);
+}
+
+/* --- Sub-copy ------------------------------------------- */
+.booking-sub {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(253, 252, 250, 0.65);
+  max-width: 460px;
+  margin: 0;
+}
+
+/* --- CTA wrap — contents injected by JS ---------------- */
+.booking-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+/* CALL MODE: large clickable phone number */
+.booking-phone-link {
+  text-decoration: none;
+  display: block;
+  transition: opacity var(--transition-base);
+}
+
+.booking-phone-link:hover {
+  opacity: 0.80;
+}
+
+.booking-phone-num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.booking-phone-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.40);
+  margin-top: var(--space-xs);
+}
+
+/* Primary booking button — used by all modes */
+.booking-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-2xl);
+  background: var(--color-white);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  transition:
+    background  var(--transition-base),
+    color       var(--transition-base),
+    transform   var(--transition-base),
+    box-shadow  var(--transition-base);
+}
+
+.booking-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 16px rgba(42, 42, 42, 0.20),
+    0 8px 28px rgba(42, 42, 42, 0.12);
+}
+
+.booking-btn:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+}
+
+.booking-btn:active {
+  transform: translateY(0);
+}
+
+/* WhatsApp button variant */
+.booking-btn--wa {
+  background: #25D366;
+  color: var(--color-white);
+}
+
+.booking-btn--wa:hover {
+  background: #1DA851;
+  color: var(--color-white);
+}
+
+.booking-btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Note under WhatsApp CTA */
+.booking-wa-note {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgba(253, 252, 250, 0.38);
+  margin: 0;
+}
+
+/* Calendly iframe */
+.booking-calendly-wrap {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated);
+}
+
+.booking-calendly-iframe {
+  width: 100%;
+  height: 650px;
+  border: none;
+  display: block;
+}
+
+/* --- Info row ------------------------------------------- */
+.booking-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  list-style: none;
+  margin-top: var(--space-sm);
+}
+
+.booking-info-item {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.38);
+  position: relative;
+}
+
+/* Dot separator between items */
+.booking-info-item + .booking-info-item::before {
+  content: '·';
+  position: absolute;
+  left: calc(-1 * var(--space-md));
+  color: rgba(253, 252, 250, 0.20);
+}
+
+/* --- Booking responsive --------------------------------- */
+@media (max-width: 767px) {
+  .section-booking {
+    padding: var(--space-3xl) 0;
+  }
+  .booking-inner {
+    flex-direction: column;
+  }
+  .booking-content {
+    align-items: center;
+    text-align: center;
+  }
+  .booking-cta-wrap {
+    align-items: center;
+  }
+  .booking-image-col {
+    width: 100%;
+  }
+  .booking-image {
+    height: 260px;
+  }
+}
+
+@media (min-width: 768px) {
+  .booking-inner {
+    padding: 0 var(--space-2xl);
+  }
+}
+
+@media (min-width: 1280px) {
+  .booking-inner {
+    padding: 0 var(--space-3xl);
+  }
+}
+
+/* ============================================================
+   14. CONTACT SECTION
+   ============================================================ */
+
+.section-contact {
+  padding: var(--space-5xl) 0;
+  background: var(--color-surface);
+  background-image:
+    radial-gradient(ellipse at 90% 10%, rgba(86, 168, 236, 0.07)  0%, transparent 55%),
+    radial-gradient(ellipse at 5%  90%, rgba(133, 194, 245, 0.06) 0%, transparent 50%);
+  position: relative;
+}
+
+.contact-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Two-column grid: info left, form right */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4xl);
+  align-items: start;
+}
+
+/* --- Left column: info ------------------------------------ */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.contact-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.contact-eyebrow-rule {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.contact-eyebrow-num {
+  color: var(--color-accent);
+}
+
+.contact-heading {
+  color: var(--color-text);
+  line-height: 1.1;
+}
+
+.contact-heading-em {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.contact-sub {
+  font-size: 1rem;
+  line-height: 1.78;
+  color: var(--color-text-light);
+  max-width: 400px;
+}
+
+/* Contact detail items: icon + value */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-detail-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-card);
+}
+
+.contact-detail-value {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+a.contact-detail-value:hover {
+  color: var(--color-primary);
+}
+
+.contact-response-note {
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  opacity: 0.65;
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(42, 42, 42, 0.08);
+}
+
+/* --- Right column: form ----------------------------------- */
+.contact-form-col {
+  position: relative;
+}
+
+/* Form layout */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+/* Side-by-side name + phone on wider screens */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+
+/* Form group: column-reverse so CSS :focus + label works
+   Visual order: label (top) → input (bottom)
+   DOM order:    input → label (allows input:focus + label) */
+.form-group {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+}
+
+/* Input / Textarea — elegant bottom-border-only style */
+.form-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(42, 42, 42, 0.20);
+  border-radius: 0;
+  padding: var(--space-sm) 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color var(--transition-base);
+}
+
+.form-input::placeholder {
+  color: rgba(42, 42, 42, 0.28);
+}
+
+.form-input:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+/* Label — turns primary green when field is focused */
+.form-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  transition: color var(--transition-base);
+  cursor: pointer;
+}
+
+/* column-reverse trick: label is DOM sibling AFTER input */
+.form-input:focus + .form-label {
+  color: var(--color-primary);
+}
+
+/* Textarea specific */
+.form-textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+/* Submit button */
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  align-self: flex-start;
+  padding: var(--space-md) var(--space-2xl);
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background  var(--transition-base),
+    transform   var(--transition-base),
+    box-shadow  var(--transition-base);
+}
+
+.form-submit:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 16px rgba(86, 168, 236, 0.30),
+    0 8px 28px rgba(42, 42, 42, 0.12);
+}
+
+.form-submit:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.form-submit:active {
+  transform: translateY(0);
+}
+
+.form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-submit-arrow {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.form-submit:hover .form-submit-arrow {
+  transform: translateX(4px);
+}
+
+/* --- Success state ---------------------------------------- */
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-2xl);
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(86, 168, 236, 0.20);
+}
+
+.contact-success[hidden] {
+  display: none;
+}
+
+.contact-success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-success-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.contact-success-text {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+/* --- Contact responsive ----------------------------------- */
+@media (min-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .contact-inner {
+    padding: 0 var(--space-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 42fr 58fr;
+    gap: var(--space-5xl);
+  }
+}
+
+@media (min-width: 1280px) {
+  .contact-inner {
+    padding: 0 var(--space-3xl);
+  }
+}
+
+/* Small label inside each placeholder section */
+.section-placeholder-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(42, 42, 42, 0.2);
+}
+
+/* ============================================================
+   8. FOOTER — Phase 8
+   Dark warm section. Three-column grid: brand | nav | contact.
+   Bottom bar: copyright + tagline.
+   ============================================================ */
+
+.site-footer {
+  background: var(--color-text);
+  background-image:
+    radial-gradient(ellipse at 8% 30%,  rgba(86, 168, 236, 0.18)  0%, transparent 52%),
+    radial-gradient(ellipse at 90% 75%, rgba(133, 194, 245, 0.10) 0%, transparent 48%);
+  padding: var(--space-5xl) 0 0;
+  position: relative;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Three-column grid */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3xl);
+  padding-bottom: var(--space-4xl);
+  border-bottom: 1px solid rgba(253, 252, 250, 0.08);
+}
+
+/* Brand column */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-white);
+  text-decoration: none;
+  width: fit-content;
+  transition: opacity var(--transition-base);
+}
+
+.footer-logo:hover,
+.footer-logo:focus-visible {
+  opacity: 0.75;
+}
+
+.footer-logo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.footer-logo:active {
+  opacity: 0.55;
+}
+
+.footer-logo-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.footer-logo-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--color-white);
+  letter-spacing: 0.01em;
+}
+
+.footer-tagline {
+  font-size: 0.88rem;
+  line-height: 1.72;
+  color: rgba(253, 252, 250, 0.55);
+  max-width: 280px;
+}
+
+.footer-hours {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.footer-facebook {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(253, 252, 250, 0.60);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  width: fit-content;
+}
+
+.footer-facebook:hover,
+.footer-facebook:focus-visible {
+  color: var(--color-white);
+}
+
+.footer-facebook:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.footer-facebook:active {
+  color: rgba(253, 252, 250, 0.40);
+}
+
+.footer-facebook-icon {
+  color: #1877F2;
+  flex-shrink: 0;
+  transition: opacity var(--transition-base);
+}
+
+.footer-facebook:hover .footer-facebook-icon {
+  opacity: 0.85;
+}
+
+/* Column label shared style */
+.footer-col-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(253, 252, 250, 0.35);
+  margin-bottom: var(--space-lg);
+}
+
+/* Nav column */
+.footer-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-nav-link {
+  font-size: 0.95rem;
+  color: rgba(253, 252, 250, 0.65);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  display: inline-block;
+  position: relative;
+}
+
+.footer-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-primary);
+  transition: width var(--transition-smooth);
+}
+
+.footer-nav-link:hover,
+.footer-nav-link:focus-visible {
+  color: var(--color-white);
+}
+
+.footer-nav-link:hover::after,
+.footer-nav-link:focus-visible::after {
+  width: 100%;
+}
+
+.footer-nav-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.footer-nav-link:active {
+  color: var(--color-primary);
+}
+
+/* Contact column */
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.footer-contact-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.footer-contact-link,
+.footer-contact-text {
+  font-size: 0.92rem;
+  color: rgba(253, 252, 250, 0.65);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.footer-contact-link:hover,
+.footer-contact-link:focus-visible {
+  color: var(--color-white);
+}
+
+.footer-contact-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.footer-contact-link:active {
+  color: var(--color-primary);
+}
+
+/* Bottom bar */
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-xl) 0;
+}
+
+.footer-copyright {
+  font-size: 0.78rem;
+  color: rgba(253, 252, 250, 0.28);
+  letter-spacing: 0.02em;
+}
+
+.footer-credit {
+  font-size: 0.85rem;
+  color: rgba(253, 252, 250, 0.22);
+}
+
+.footer-credit-em {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: rgba(253, 252, 250, 0.30);
+}
+
+/* Desktop: two-column then three-column */
+@media (min-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1.4fr;
+    gap: var(--space-4xl);
+  }
+}
+
+
+/* ============================================================
+   9. WHATSAPP FLOAT — Phase 9
+   Fixed bottom-right. Pulse ring animation on idle.
+   Tooltip slides in on hover. z-index above everything.
+   ============================================================ */
+
+.wa-float {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  z-index: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  background: #25D366;
+  color: #fff;
+
+  box-shadow:
+    0 4px 12px  rgba(37, 211, 102, 0.35),
+    0 12px 40px rgba(37, 211, 102, 0.20),
+    0 2px 6px   rgba(0, 0, 0, 0.18);
+
+  text-decoration: none;
+  will-change: transform, opacity;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+/* Pulse ring: CSS animation, runs on idle */
+.wa-float::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.40);
+  animation: wa-pulse 2.8s ease-out infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@keyframes wa-pulse {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  70%  { transform: scale(1.55); opacity: 0;   }
+  100% { transform: scale(1.55); opacity: 0;   }
+}
+
+.wa-float:hover,
+.wa-float:focus-visible {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow:
+    0 6px 20px  rgba(37, 211, 102, 0.45),
+    0 18px 56px rgba(37, 211, 102, 0.28),
+    0 2px 6px   rgba(0, 0, 0, 0.20);
+}
+
+/* Pause pulse on hover — less distracting while user reads tooltip */
+.wa-float:hover::before,
+.wa-float:focus-visible::before {
+  animation-play-state: paused;
+}
+
+.wa-float:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.wa-float:active {
+  transform: scale(0.96);
+  transition-duration: 80ms;
+}
+
+/* Icon */
+.wa-float-icon {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* Tooltip */
+.wa-float-tooltip {
+  position: absolute;
+  right: calc(100% + var(--space-sm));
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+
+  background: var(--color-text);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  box-shadow:
+    0 2px 8px  rgba(42, 42, 42, 0.18),
+    0 6px 24px rgba(42, 42, 42, 0.12);
+
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-smooth);
+  will-change: transform, opacity;
+}
+
+.wa-float:hover .wa-float-tooltip,
+.wa-float:focus-visible .wa-float-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Reduce bottom offset on very small screens so it doesn't crowd the edge */
+@media (max-width: 400px) {
+  .wa-float {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: 50px;
+    height: 50px;
+  }
+}
+
+
+/* ============================================================
+   9. RESPONSIVE — DESKTOP NAV
+   Mobile first: hamburger is default, links hidden.
+   At 768px+: links show, hamburger hides.
+   ============================================================ */
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+
+  .nav-hamburger {
+    display: none;
+  }
+
+  /* Overlay is irrelevant on desktop — hide it regardless of class state */
+  .nav-mobile-overlay {
+    display: none;
+  }
+
+  .nav-inner {
+    padding: 0 var(--space-2xl);
+  }
+}
+
+@media (min-width: 1280px) {
+  .nav-inner {
+    padding: 0 var(--space-3xl);
+  }
+}
+
+
+/* ============================================================
+   FAITHFUL HOUNDS — CLIENT-SPECIFIC OVERRIDES
+   All overrides below are specific to this client.
+   Do not copy back to the master template.
+   ============================================================ */
+
+/* --- Nav logo: "Dog Grooming" sub-label -------------------- */
+.nav-logo-sub {
+  font-size: 0.78em;
+  font-weight: 300;
+  opacity: 0.72;
+  letter-spacing: 0.04em;
+}
+
+/* --- Services header: full-width flex with logo on right --- */
+.services-header {
+  max-width: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3xl);
+}
+
+.services-header-text {
+  max-width: 520px;
+}
+
+.services-header-images {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-shrink: 0;
+}
+
+.services-header-about {
+  width: clamp(150px, 18vw, 230px);
+  height: clamp(180px, 22vw, 280px);
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  box-shadow:
+    0 0 0 4px rgba(253, 254, 255, 0.18),
+    0 0 35px rgba(86, 168, 236, 0.40),
+    0 0 75px rgba(86, 168, 236, 0.18),
+    var(--shadow-elevated);
+}
+
+.services-header-logo {
+  width: clamp(180px, 22vw, 280px);
+  height: clamp(180px, 22vw, 280px);
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  /* Glow effect mirrors the "Welcome to" white-highlight treatment */
+  box-shadow:
+    0 0 0 4px rgba(253, 254, 255, 0.18),
+    0 0 35px rgba(86, 168, 236, 0.40),
+    0 0 75px rgba(86, 168, 236, 0.18),
+    var(--shadow-elevated);
+  align-self: center;
+}
+
+@media (max-width: 767px) {
+  .services-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .services-header-images {
+    display: none;
+  }
+}
+
+/* --- Footer logo image (replaces SVG paw icon) ------------ */
+.footer-logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.20);
+}
+
+/* --- Nav logo image (replaces SVG paw icon) --------------- */
+.nav-logo-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  /* Subtle ring so it reads well on both transparent + frosted nav */
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.25);
+}
+
+/* "Faithful Hounds" nav text — dark slate grey.
+   White text-shadow ensures legibility over the dark hero video
+   when the nav is transparent. Shadow fades out once scrolled. */
+.nav-logo-text {
+  color: #2E3D4D;
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.75),
+    0 1px 3px  rgba(255, 255, 255, 0.85);
+}
+
+.is-scrolled .nav-logo-text {
+  text-shadow: none;
+}
+
+/* --- "Welcome to" — dark slate grey over the hero video ---- */
+.hero-headline-intro {
+  color: #2E3D4D;
+  /* White glow ensures the dark text reads on the dark video */
+  text-shadow:
+    0 0 16px rgba(255, 255, 255, 0.80),
+    0 2px 6px  rgba(255, 255, 255, 0.65);
+}
+
+/* --- Hero content: nudge down a touch ---------------------- */
+/* Longer subheadline makes the block taller; this keeps it from
+   feeling cramped against the top nav on shorter viewports. */
+.hero-subheadline {
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* --- Gallery strip ----------------------------------------- */
+.section-gallery {
+  overflow: hidden;
+}
+
+.gallery-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: clamp(200px, 32vw, 380px);
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+/* Subtle gradient overlay per CLAUDE.md */
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(28, 33, 48, 0.32), transparent 55%);
+  pointer-events: none;
+}
+
+/* Mobile: reduce height, keep 3 columns */
+@media (max-width: 500px) {
+  .gallery-strip {
+    height: 160px;
+  }
+}

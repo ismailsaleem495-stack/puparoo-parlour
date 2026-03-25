@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puparoo Parlour Dog Grooming — Copthorne, Crawley</title>
+  <meta name="description" content="City & Guilds qualified dog grooming in Copthorne, Crawley. 1-to-1 personal care for every dog. Regular and new customers always welcome. Book with Ella today.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <header class="site-nav" id="site-nav" role="banner">
+    <div class="nav-inner">
+
+      <a href="#" class="nav-logo" aria-label="Puparoo Parlour — Home">
+        <img
+          class="nav-logo-img"
+          src="brand_assets/Logo.jpg"
+          alt="Puparoo Parlour logo"
+          width="38"
+          height="38"
+        >
+        <span class="nav-logo-text">Puparoo Parlour <span class="nav-logo-sub">Dog Grooming</span></span>
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
+        <a href="#booking" class="nav-link">Booking</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="tel:07966762604" class="nav-link nav-link--cta">07966 762604</a>
+      </nav>
+
+      <button
+        class="nav-hamburger"
+        id="nav-hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile-overlay"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div
+    class="nav-mobile-overlay"
+    id="nav-mobile-overlay"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Mobile navigation"
+  >
+    <nav class="mobile-nav-links" aria-label="Mobile navigation links">
+      <a href="#services" class="mobile-nav-link">Services</a>
+      <a href="#about" class="mobile-nav-link">About</a>
+      <a href="#reviews" class="mobile-nav-link">Reviews</a>
+      <a href="#booking" class="mobile-nav-link">Booking</a>
+      <a href="gallery.html" class="mobile-nav-link">Gallery</a>
+      <a href="blog.html" class="mobile-nav-link">Blog</a>
+      <a href="tel:07966762604" class="mobile-nav-link mobile-nav-link--cta">07966 762604</a>
+    </nav>
+    <p class="mobile-nav-phone">
+      <a href="tel:07966762604">07966 762604</a>
+    </p>
+  </div>
+
+
+  <main id="main">
+
+    <!-- ============================================================
+         HERO
+         Video background (desktop) + poster fallback (mobile).
+         GSAP animates content in — see js/main.js hero section.
+    ============================================================ -->
+    <section class="section-hero" id="hero" aria-label="Hero">
+
+      <!-- Background: video (desktop), poster/colour (mobile) -->
+      <div class="hero-media" aria-hidden="true">
+        <video
+          class="hero-video"
+          muted
+          playsinline
+          preload="metadata"
+          loop
+          autoplay
+          poster="assets/images/hero-poster.jpg"
+        >
+          <source src="assets/video/hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+      </div>
+
+      <!-- Location tag: top-right -->
+      <p class="hero-eyebrow" aria-label="Location: Copthorne, Crawley">
+        <svg class="hero-eyebrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="6" cy="6" r="3"/>
+          <circle cx="6" cy="18" r="3"/>
+          <path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>
+        </svg>
+        Copthorne, Crawley
+      </p>
+
+      <!-- Content: headline, subheadline, CTA -->
+      <div class="hero-content">
+        <div class="hero-content-inner">
+          <h1 class="hero-headline"><span class="hero-headline-intro">Welcome to</span><br><em class="hero-headline-em">Puparoo Parlour</em></h1>
+          <p class="hero-subheadline">City &amp; Guilds qualified dog grooming in Copthorne. Every dog receives 1-to-1 personal care from start to finish — regulars and new customers always welcome.</p>
+          <a href="#contact" class="hero-cta">
+            Book an Appointment
+            <span class="hero-cta-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service tags: bottom-right -->
+      <div class="hero-service-tags" aria-hidden="true">
+        <span class="hero-service-tag">Full Groom</span>
+        <span class="hero-service-tag">Bath &amp; Blowdry</span>
+        <span class="hero-service-tag">Puppy's First Groom</span>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span class="hero-scroll-hint-label">Scroll</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         SERVICES
+    ============================================================ -->
+    <section class="section-services" id="services" aria-label="Our services">
+      <div class="services-inner">
+
+        <!-- Section header -->
+        <header class="services-header">
+          <div class="services-header-text">
+            <p class="services-eyebrow">
+              <span class="services-eyebrow-rule" aria-hidden="true"></span>
+              <span class="services-eyebrow-num">02</span>
+              Our Services
+            </p>
+            <h2 class="services-heading">Every Coat,<br><em class="services-heading-em">Every Breed</em></h2>
+            <p class="services-intro">A complete range of grooming services from the Puparoo Parlour salon in Copthorne — tailored to your dog's breed, coat type, and individual needs.</p>
+          </div>
+          <div class="services-header-images">
+            <img
+              class="services-header-about"
+              src="brand_assets/About.jpg"
+              alt="Ella at Puparoo Parlour"
+              loading="lazy"
+            >
+            <img
+              class="services-header-logo"
+              src="brand_assets/Logo.jpg"
+              alt="Puparoo Parlour"
+              aria-hidden="true"
+              loading="lazy"
+            >
+          </div>
+        </header>
+
+        <!-- Services grid -->
+        <ul class="services-grid" role="list">
+
+          <!-- 01 — Full Groom (featured) -->
+          <li class="service-card service-card--featured">
+            <span class="service-card-num" aria-hidden="true">01</span>
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <div class="service-content">
+              <span class="service-badge">Most Popular</span>
+              <h3 class="service-title">Full Groom</h3>
+              <p class="service-desc">The complete treatment — bath, blow-dry, breed-specific scissor finish, nail clip, ear clean, and a light spritz. Your dog leaves looking and feeling their absolute best.</p>
+              <div class="service-footer">
+                <div class="service-price-wrap">
+                  <span class="service-price-label">From</span>
+                  <span class="service-price">£55</span>
+                </div>
+                <span class="service-duration">2–3 hrs</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- 02 — Bath & Blowdry -->
+          <li class="service-card">
+            <span class="service-card-num" aria-hidden="true">02</span>
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              </svg>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Bath &amp; Blowdry</h3>
+              <p class="service-desc">Deep-cleanse shampoo, conditioning treatment, and a professional blow-dry with thorough brush-out. Leaves the coat fresh, clean, and tangle-free.</p>
+              <div class="service-footer">
+                <div class="service-price-wrap">
+                  <span class="service-price-label">From</span>
+                  <span class="service-price">£35</span>
+                </div>
+                <span class="service-duration">1–1.5 hrs</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- 03 — Puppy's First Groom -->
+          <li class="service-card">
+            <span class="service-card-num" aria-hidden="true">03</span>
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Puppy's First Groom</h3>
+              <p class="service-desc">A gentle introduction to the salon. Short, positive sessions designed to build confidence and lay the foundation for a lifetime of stress-free grooming.</p>
+              <div class="service-footer">
+                <div class="service-price-wrap">
+                  <span class="service-price-label">From</span>
+                  <span class="service-price">£30</span>
+                </div>
+                <span class="service-duration">~1 hr</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- 04 — Hand Strip -->
+          <li class="service-card">
+            <span class="service-card-num" aria-hidden="true">04</span>
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="7" rx="2"/>
+                <line x1="5"    y1="10" x2="5"    y2="17"/>
+                <line x1="8.5"  y1="10" x2="8.5"  y2="20"/>
+                <line x1="12"   y1="10" x2="12"   y2="17"/>
+                <line x1="15.5" y1="10" x2="15.5" y2="20"/>
+                <line x1="19"   y1="10" x2="19"   y2="17"/>
+              </svg>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Hand Strip</h3>
+              <p class="service-desc">A specialist technique for wire-coated breeds — Terriers, Spaniels, and more. Dead coat is removed by hand to maintain correct texture and breed standard.</p>
+              <div class="service-footer">
+                <div class="service-price-wrap">
+                  <span class="service-price-label">From</span>
+                  <span class="service-price">£65</span>
+                </div>
+                <span class="service-duration">2.5–3 hrs</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- 05 — Nail Clip & File -->
+          <li class="service-card">
+            <span class="service-card-num" aria-hidden="true">05</span>
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="6" r="3"/>
+                <circle cx="6" cy="18" r="3"/>
+                <line x1="20" y1="4"    x2="8.12" y2="15.88"/>
+                <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+                <line x1="8.12" y1="8.12"  x2="12" y2="12"/>
+              </svg>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Nail Clip &amp; File</h3>
+              <p class="service-desc">A quick, stress-free nail trim and file. Perfect as a standalone top-up between grooms, or to keep things tidy when the floors start suffering.</p>
+              <div class="service-footer">
+                <div class="service-price-wrap">
+                  <span class="service-price-label">&nbsp;</span>
+                  <span class="service-price">£12</span>
+                </div>
+                <span class="service-duration">~15 min</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- 06 — De-Shed Treatment -->
+          <li class="service-card">
+            <span class="service-card-num" aria-hidden="true">06</span>
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+              </svg>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">De-Shed Treatment</h3>
+              <p class="service-desc">Intensive deshedding shampoo, deep conditioner, and a high-velocity blow-out with thorough brushing. Dramatically reduces loose hair for weeks.</p>
+              <div class="service-footer">
+                <div class="service-price-wrap">
+                  <span class="service-price-label">From</span>
+                  <span class="service-price">£45</span>
+                </div>
+                <span class="service-duration">1.5–2 hrs</span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- Pricing note -->
+        <p class="services-note">
+          Prices vary by breed, size, and coat condition.
+          <a href="#contact" class="services-note-link">Get in touch</a> for a tailored quote.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT
+    ============================================================ -->
+    <section class="section-about" id="about" aria-label="About Ella">
+      <div class="about-inner">
+        <div class="about-grid">
+
+          <!-- Photo column -->
+          <div class="about-photo-col">
+            <div class="about-photo-frame">
+              <div class="about-photo-wrap">
+                <img
+                  src="brand_assets/About.jpg"
+                  alt="Ella Chapman, dog groomer at Puparoo Parlour, Copthorne"
+                  class="about-photo"
+                  loading="lazy"
+                  width="600"
+                  height="720"
+                >
+                <div class="about-photo-overlay" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Floating credential badge -->
+            <div class="about-credential" aria-hidden="true">
+              <div class="about-credential-icon">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="currentColor">
+                  <circle cx="5.5" cy="5.5" r="2.8"/>
+                  <circle cx="11"  cy="3.2" r="2.8"/>
+                  <circle cx="16.5" cy="5.5" r="2.8"/>
+                  <ellipse cx="11" cy="15" rx="6" ry="5"/>
+                </svg>
+              </div>
+              <div class="about-credential-text">
+                <strong>City &amp; Guilds</strong>
+                <span>Qualified</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content column -->
+          <div class="about-content">
+
+            <p class="about-eyebrow">
+              <span class="about-eyebrow-rule" aria-hidden="true"></span>
+              <span class="about-eyebrow-num">03</span>
+              About Ella
+            </p>
+
+            <h2 class="about-heading">Qualified, caring,<br><em class="about-heading-em">one dog at a time.</em></h2>
+
+            <div class="about-body">
+              <p>I'm Ella, a City &amp; Guilds qualified dog groomer based in Copthorne. I offer a full range of grooming services with one thing at the heart of everything I do — your dog gets my complete, undivided attention from the moment they arrive to the moment they leave.</p>
+              <p>There are no distractions, no other dogs, and no rushing. Every appointment is a 1-to-1 experience tailored to your dog's individual coat, temperament, and needs. Whether your dog is a familiar face or visiting for the first time, they'll always be treated with the same patience and care.</p>
+              <p>I love seeing my regulars and genuinely enjoy welcoming new dogs into the parlour. If you're looking for a groomer who takes their time and truly cares, I'd love to meet your dog.</p>
+            </div>
+
+            <!-- Trust stats -->
+            <dl class="about-stats">
+              <div class="about-stat">
+                <dd class="about-stat-value">C&amp;G</dd>
+                <dt class="about-stat-label">Qualified</dt>
+              </div>
+              <div class="about-stat">
+                <dd class="about-stat-value">1-to-1</dd>
+                <dt class="about-stat-label">Every Appointment</dt>
+              </div>
+              <div class="about-stat">
+                <dd class="about-stat-value">5.0<span class="about-stat-sup">★</span></dd>
+                <dt class="about-stat-label">Google Rating</dt>
+              </div>
+            </dl>
+
+            <a href="#contact" class="about-cta">
+              Book with Ella
+              <span class="about-cta-arrow" aria-hidden="true">→</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         GALLERY
+    ============================================================ -->
+    <section class="section-gallery" aria-label="Gallery">
+      <div class="gallery-strip">
+        <div class="gallery-item">
+          <img src="brand_assets/Image 1.jpg" alt="Dog grooming at Puparoo Parlour" loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <img src="brand_assets/Image 2.jpg" alt="Happy dog after grooming" loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <img src="brand_assets/Image 3.jpg" alt="Dog grooming session at Puparoo Parlour" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         REVIEWS
+    ============================================================ -->
+    <section class="section-reviews" id="reviews" aria-label="Client reviews">
+      <div class="reviews-inner">
+
+        <div class="reviews-header">
+          <p class="reviews-eyebrow">
+            <span class="reviews-eyebrow-rule" aria-hidden="true"></span>
+            <span class="reviews-eyebrow-num">04</span>
+            Google Reviews
+          </p>
+          <div class="reviews-aggregate">
+            <span class="reviews-aggregate-score" aria-label="Rated 5.0 out of 5">5.0</span>
+            <div class="reviews-aggregate-detail">
+              <span class="reviews-aggregate-stars" aria-hidden="true">★★★★★</span>
+              <span class="reviews-aggregate-count">Based on 38 Google reviews</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews-grid" id="reviews-grid" role="list" aria-label="Customer reviews"></div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BOOKING
+    ============================================================ -->
+    <section class="section-booking" id="booking" aria-label="Book an appointment">
+      <div class="booking-inner">
+        <div class="booking-content">
+
+          <p class="booking-eyebrow">
+            <span class="booking-eyebrow-rule" aria-hidden="true"></span>
+            <span class="booking-eyebrow-num">05</span>
+            Booking
+          </p>
+
+          <h2 class="booking-heading">
+            Ready When<br><em class="booking-heading-em">You Are.</em>
+          </h2>
+
+          <p class="booking-sub">Bookings taken directly by Ella. No call centres, no waiting lists — just a quick message or call to get your dog booked in.</p>
+
+          <div class="booking-cta-wrap" id="booking-cta" aria-live="polite"></div>
+
+          <ul class="booking-info" role="list">
+            <li class="booking-info-item">Tues–Thurs</li>
+            <li class="booking-info-item">Copthorne, Crawley</li>
+            <li class="booking-info-item">One dog at a time</li>
+          </ul>
+
+        </div>
+
+        <!-- Booking image -->
+        <div class="booking-image-col">
+          <img
+            class="booking-image"
+            src="brand_assets/Image 1.jpg"
+            alt="Happy dog after a groom at Puparoo Parlour"
+            loading="lazy"
+          >
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT
+    ============================================================ -->
+    <section class="section-contact" id="contact" aria-label="Contact us">
+      <div class="contact-inner">
+        <div class="contact-grid">
+
+          <div class="contact-info">
+
+            <p class="contact-eyebrow">
+              <span class="contact-eyebrow-rule" aria-hidden="true"></span>
+              <span class="contact-eyebrow-num">06</span>
+              Get in Touch
+            </p>
+
+            <h2 class="contact-heading">Let's Talk About<br><em class="contact-heading-em">Your Dog</em></h2>
+
+            <p class="contact-sub">Fill in the form and Ella will be in touch to discuss your dog's needs and find a time that works for you.</p>
+
+            <ul class="contact-details" role="list">
+              <li class="contact-detail">
+                <span class="contact-detail-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </span>
+                <a href="tel:07966762604" class="contact-detail-value">07966 762604</a>
+              </li>
+              <li class="contact-detail">
+                <span class="contact-detail-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </span>
+                <span class="contact-detail-value">15 Fairway, Copthorne, Crawley RH10 3QD</span>
+              </li>
+              <li class="contact-detail">
+                <span class="contact-detail-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </span>
+                <span class="contact-detail-value">Tues 10am–2:30pm · Wed 9:30am–5pm · Thurs 9:30am–7pm</span>
+              </li>
+            </ul>
+
+            <p class="contact-response-note">Typically responds within a few hours during opening times.</p>
+
+          </div>
+
+          <div class="contact-form-col">
+            <form
+              class="contact-form"
+              id="contact-form"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST"
+              novalidate
+            >
+
+              <div class="form-row">
+                <div class="form-group">
+                  <input class="form-input" type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Jane Smith">
+                  <label class="form-label" for="contact-name">Full Name</label>
+                </div>
+                <div class="form-group">
+                  <input class="form-input" type="tel" id="contact-phone" name="phone" required autocomplete="tel" placeholder="07700 900000">
+                  <label class="form-label" for="contact-phone">Phone Number</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input class="form-input" type="text" id="contact-breed" name="breed" required placeholder="e.g. Cockapoo, Labrador">
+                <label class="form-label" for="contact-breed">Dog's Breed</label>
+              </div>
+
+              <div class="form-group">
+                <textarea class="form-input form-textarea" id="contact-message" name="message" rows="4" placeholder="Tell Ella a little about your dog and what you're looking for…"></textarea>
+                <label class="form-label" for="contact-message">Message</label>
+              </div>
+
+              <input type="hidden" name="_source" value="puparoo-parlour-website">
+              <input type="hidden" name="_subject" value="New booking enquiry — Puparoo Parlour">
+
+              <button type="submit" class="form-submit" id="form-submit-btn">
+                Send Message
+                <span class="form-submit-arrow" aria-hidden="true">→</span>
+              </button>
+
+            </form>
+
+            <div class="contact-success" id="contact-success" hidden aria-live="polite">
+              <div class="contact-success-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <p class="contact-success-title">Message Sent</p>
+              <p class="contact-success-text">Ella will be in touch shortly. Looking forward to meeting your dog!</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer-inner">
+
+      <div class="footer-grid">
+
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <a href="#" class="footer-logo" aria-label="Puparoo Parlour — Back to top">
+            <img
+              class="footer-logo-img"
+              src="brand_assets/Logo.jpg"
+              alt="Puparoo Parlour logo"
+              width="36"
+              height="36"
+            >
+            <span class="footer-logo-name">Puparoo Parlour Dog Grooming</span>
+          </a>
+          <p class="footer-tagline">City &amp; Guilds qualified dog grooming in Copthorne, Crawley. One dog at a time.</p>
+          <p class="footer-hours">Tues &middot; Wed &middot; Thurs</p>
+          <a
+            href="https://www.facebook.com/profile.php?id=100063943997284"
+            class="footer-facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Puparoo Parlour on Facebook"
+          >
+            <svg class="footer-facebook-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.931-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+            </svg>
+            Find us on Facebook
+          </a>
+        </div>
+
+        <!-- Navigation column -->
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <p class="footer-col-label">Navigate</p>
+          <ul class="footer-nav-list" role="list">
+            <li><a href="#services" class="footer-nav-link">Services</a></li>
+            <li><a href="#about"    class="footer-nav-link">About Ella</a></li>
+            <li><a href="#reviews"  class="footer-nav-link">Reviews</a></li>
+            <li><a href="#booking"  class="footer-nav-link">Booking</a></li>
+            <li><a href="#contact"  class="footer-nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Contact column -->
+        <div class="footer-contact">
+          <p class="footer-col-label">Get in Touch</p>
+          <ul class="footer-contact-list" role="list">
+            <li class="footer-contact-item">
+              <svg class="footer-contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a href="tel:07966762604" class="footer-contact-link">07966 762604</a>
+            </li>
+            <li class="footer-contact-item">
+              <svg class="footer-contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span class="footer-contact-text">15 Fairway, Copthorne, Crawley RH10 3QD</span>
+            </li>
+            <li class="footer-contact-item">
+              <svg class="footer-contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <a
+                href="https://wa.me/447966762604?text=Hi%20Ella%2C%20I%27d%20like%20to%20book%20a%20grooming%20appointment%20for%20my%20dog."
+                class="footer-contact-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >WhatsApp Ella</a>
+            </li>
+          </ul>
+        </div>
+
+      </div><!-- /footer-grid -->
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom" role="contentinfo">
+        <p class="footer-copyright">&copy; 2026 Puparoo Parlour Dog Grooming. All rights reserved.</p>
+        <p class="footer-credit">
+          <em class="footer-credit-em">One groomer. One dog at a time.</em>
+        </p>
+      </div>
+
+    </div><!-- /footer-inner -->
+  </footer>
+
+  <!-- ============================================================
+       WHATSAPP FLOAT
+  ============================================================ -->
+  <a
+    class="wa-float"
+    href="https://wa.me/447966762604?text=Hi%20Ella%2C%20I%27d%20like%20to%20book%20a%20grooming%20appointment%20for%20my%20dog."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Ella on WhatsApp"
+  >
+    <svg class="wa-float-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="26" height="26">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="wa-float-tooltip" aria-hidden="true">Chat with Ella</span>
+  </a>
+
+
+  <!-- CDN: Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- CDN: GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
